@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>真是让人头大 · 每日汇报</title>
+    <title>奥力给能量站 · 每日汇报</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -21,7 +21,7 @@
             color: #4a3b32;
         }
         .report-card {
-            max-width: 820px;
+            max-width: 860px;
             width: 100%;
             background: rgba(255, 250, 245, 0.85);
             backdrop-filter: blur(12px);
@@ -30,6 +30,30 @@
             box-shadow: 0 25px 50px -8px rgba(140, 90, 60, 0.12);
             padding: 32px 28px;
             border: 1px solid #ffe8d9;
+            position: relative;
+        }
+        /* 提交成功动画层 */
+        .success-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.3);
+            backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+        .success-animation {
+            font-size: 15rem;
+            animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        @keyframes popIn {
+            0% { transform: scale(0.2); opacity: 0; }
+            80% { transform: scale(1.1); }
+            100% { transform: scale(1); opacity: 1; }
         }
         .top-bar {
             display: flex;
@@ -44,67 +68,61 @@
             font-weight: 600;
             color: #7a5340;
             font-size: 1rem;
-            box-shadow: inset 0 1px 3px white;
         }
-        .easter-egg-area {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+        .easter-egg-area { display: flex; align-items: center; gap: 10px; }
         .poke-icon {
-            font-size: 2rem;
-            cursor: pointer;
-            transition: transform 0.2s;
+            font-size: 2rem; cursor: pointer; transition: transform 0.2s;
             filter: drop-shadow(0 4px 6px rgba(0,0,0,0.05));
         }
         .poke-icon:active { transform: scale(0.9); }
         .poke-toast {
-            background: #b47a68;
-            color: white;
-            padding: 8px 16px;
-            border-radius: 50px;
-            font-weight: 500;
-            font-size: 0.9rem;
-            opacity: 0;
-            transition: opacity 0.2s;
-            pointer-events: none;
+            background: #b47a68; color: white; padding: 8px 16px;
+            border-radius: 50px; font-weight: 500; opacity: 0;
+            transition: opacity 0.2s; pointer-events: none;
         }
         .header-section {
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
+            margin-bottom: 20px; display: flex; align-items: center;
+            justify-content: space-between; flex-wrap: wrap;
         }
-        .title-group h1 {
-            font-size: 2.2rem;
-            font-weight: 600;
-            color: #6e4f3a;
-        }
+        .title-group h1 { font-size: 2.2rem; font-weight: 600; color: #6e4f3a; }
         .date-badge {
-            background: #ffeadd;
-            padding: 8px 18px;
-            border-radius: 60px;
-            color: #7a5a4a;
-            font-weight: 500;
+            background: #ffeadd; padding: 8px 18px; border-radius: 60px;
+            color: #7a5a4a; font-weight: 500;
         }
+        /* 天气卡片 */
+        .weather-card {
+            background: #d9e6f2; border-radius: 28px; padding: 16px 20px;
+            margin-bottom: 24px; border: 1px solid #b8d0e0;
+            display: flex; align-items: center; flex-wrap: wrap; gap: 16px;
+        }
+        .weather-icon { font-size: 2.5rem; margin-right: 8px; }
+        .weather-info { flex: 1; }
+        .weather-temp { font-size: 1.8rem; font-weight: 700; }
+        .weather-desc { color: #3a5a6e; }
+        .clothes-tip {
+            background: #fdf8f2; padding: 8px 18px; border-radius: 40px;
+            font-weight: 500; color: #5f4a3c;
+        }
+        /* 喝水打卡 */
+        .water-section {
+            background: #e4f2fe; border-radius: 32px; padding: 18px 20px;
+            margin-bottom: 24px; border: 1px solid #bdd8ec;
+        }
+        .water-title { font-weight: 600; margin-bottom: 12px; display: flex; gap: 10px; }
+        .cups-container { display: flex; gap: 12px; flex-wrap: wrap; }
+        .cup {
+            font-size: 2rem; cursor: pointer; opacity: 0.4;
+            transition: opacity 0.2s, transform 0.1s;
+        }
+        .cup.filled { opacity: 1; color: #3a8fc2; }
+        .cup:hover { transform: scale(1.1); }
+        /* 心情面板等保持不变 */
         .mood-panel {
-            background: #fff7f0;
-            border-radius: 36px;
-            padding: 20px 22px;
-            margin-bottom: 28px;
-            border: 1px solid #ffdcc8;
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            gap: 16px 24px;
+            background: #fff7f0; border-radius: 36px; padding: 20px 22px;
+            margin-bottom: 28px; border: 1px solid #ffdcc8;
+            display: flex; flex-wrap: wrap; align-items: center; gap: 16px 24px;
         }
-        .mood-gauge-wrap {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            min-width: 200px;
-        }
+        .mood-gauge-wrap { display: flex; align-items: center; gap: 10px; min-width: 200px; }
         .gauge-container { width: 120px; height: 60px; }
         canvas#moodGauge { display: block; width: 100%; height: auto; }
         .mood-value-large { font-size: 2.2rem; font-weight: 700; color: #8b5e4b; }
@@ -115,33 +133,22 @@
         .slider-block { flex: 1; min-width: 180px; }
         .slider-block input { width: 100%; accent-color: #e07c6c; }
         .mood-hint { font-size: 0.75rem; color: #b28b7a; margin-top: 4px; }
-        .last-mood-note {
-            margin-top: 8px; font-size: 0.9rem; color: #b37b64; font-weight: 500;
-        }
+        .last-mood-note { margin-top: 8px; font-size: 0.9rem; color: #b37b64; font-weight: 500; }
+        /* 用餐区省略，与之前一致，只做微调 */
         .meal-section { margin: 20px 0 24px; }
-        .section-title {
-            font-size: 1.6rem; font-weight: 600; color: #7b5a48;
-            margin-bottom: 18px; display: flex; align-items: center; gap: 8px;
-        }
+        .section-title { font-size: 1.6rem; font-weight: 600; color: #7b5a48; margin-bottom: 18px; }
         .meal-card {
             background: #fffbf8; border-radius: 28px; padding: 18px 20px;
             margin-bottom: 16px; border: 1px solid #ffddd0;
         }
-        .meal-header {
-            display: flex; align-items: center; justify-content: space-between;
-            margin-bottom: 12px;
-        }
+        .meal-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
         .meal-name { font-size: 1.3rem; font-weight: 600; color: #5f4538; }
         .toggle-group { display: flex; gap: 8px; }
         .toggle-btn {
             background: #f4e9e2; border: none; color: #7a5a4a; padding: 8px 16px;
-            border-radius: 50px; font-weight: 600; cursor: pointer;
-            border: 1px solid #eed9cc;
+            border-radius: 50px; font-weight: 600; cursor: pointer; border: 1px solid #eed9cc;
         }
-        .toggle-btn.active {
-            background: #c98b7a; border-color: #b16f5e; color: white;
-            box-shadow: 0 6px 10px rgba(190, 100, 80, 0.18);
-        }
+        .toggle-btn.active { background: #c98b7a; border-color: #b16f5e; color: white; }
         .meal-detail-input {
             margin-top: 14px; display: flex; align-items: center; gap: 8px;
             background: #fff5ee; padding: 4px 16px 4px 12px; border-radius: 50px;
@@ -164,10 +171,7 @@
             padding: 14px 18px; font-family: 'Quicksand', sans-serif;
             min-height: 80px; background: white; resize: vertical;
         }
-        .submit-area {
-            display: flex; align-items: center; justify-content: space-between;
-            flex-wrap: wrap; gap: 16px; margin-top: 8px;
-        }
+        .submit-area { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; margin-top: 8px; }
         .btn-primary {
             background: #b47a68; color: white; border: none; padding: 18px 36px;
             border-radius: 80px; font-weight: 700; font-size: 1.2rem;
@@ -179,31 +183,22 @@
             font-size: 1.1rem; font-weight: 500; color: #8b6b5c;
             background: #fff1e7; padding: 8px 20px; border-radius: 60px;
         }
-        .stats-footer {
-            margin-top: 24px; display: flex; flex-wrap: wrap; justify-content: space-between;
-            align-items: center; border-top: 1px dashed #f0cfbe; padding-top: 18px;
-        }
+        .stats-footer { margin-top: 24px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; border-top: 1px dashed #f0cfbe; padding-top: 18px; }
         .streak-info { font-weight: 600; color: #8b5e4b; }
-        .calendar-mini {
-            background: #fffaf5; border-radius: 30px; padding: 14px 16px;
-            margin-top: 16px; border: 1px solid #ffddd0;
-        }
+        .calendar-mini { background: #fffaf5; border-radius: 30px; padding: 14px 16px; margin-top: 16px; border: 1px solid #ffddd0; }
         .calendar-title { font-weight: 600; margin-bottom: 8px; }
-        .calendar-grid {
-            display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px;
-            text-align: center;
-        }
-        .cal-day {
-            padding: 6px 0; border-radius: 20px; background: #f5e6de;
-            font-weight: 500; color: #624b3e;
-        }
+        .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; text-align: center; }
+        .cal-day { padding: 6px 0; border-radius: 20px; background: #f5e6de; font-weight: 500; color: #624b3e; }
         .cal-day.checked { background: #d48d7a; color: white; }
         .footer-note { margin-top: 16px; text-align: center; color: #b29282; }
     </style>
 </head>
 <body>
+<div class="success-overlay" id="successOverlay">
+    <div class="success-animation">👌</div>
+</div>
 <div class="report-card">
-    <!-- 顶部：随机欢迎语 + 戳戳乐彩蛋 -->
+    <!-- 顶部问候与彩蛋 -->
     <div class="top-bar">
         <div class="greeting-box" id="greetingMsg">加载问候...</div>
         <div class="easter-egg-area">
@@ -214,13 +209,29 @@
 
     <div class="header-section">
         <div class="title-group">
-            <h1>🏀 真是让人头大</h1>
+            <h1>🏀 奥力给能量站</h1>
             <span style="font-size:0.9rem; color:#a58373;">记录今日奥力给</span>
         </div>
         <div class="date-badge" id="todayDate"></div>
     </div>
 
-    <!-- 心情仪表区 (含上次心情记忆) -->
+    <!-- 天气卡片 -->
+    <div class="weather-card" id="weatherBox">
+        <div class="weather-icon" id="weatherIcon">☀️</div>
+        <div class="weather-info">
+            <div><span class="weather-temp" id="weatherTemp">--°C</span> <span id="weatherCity">加载中...</span></div>
+            <div class="weather-desc" id="weatherDesc">获取天气...</div>
+        </div>
+        <div class="clothes-tip" id="clothesTip">--</div>
+    </div>
+
+    <!-- 喝水打卡 -->
+    <div class="water-section">
+        <div class="water-title"><i class="fas fa-tint" style="color:#3a8fc2;"></i> 今日喝水打卡 <span id="waterCountDisplay">0/8</span></div>
+        <div class="cups-container" id="cupsContainer"></div>
+    </div>
+
+    <!-- 心情仪表 -->
     <div class="mood-panel">
         <div class="mood-gauge-wrap">
             <div class="gauge-container"><canvas id="moodGauge" width="120" height="60"></canvas></div>
@@ -237,60 +248,30 @@
         </div>
     </div>
 
-    <!-- 用餐区 -->
+    <!-- 用餐区（早餐午餐晚餐夜宵）与之前一致，省略重复样式，直接复制之前的HTML结构 -->
     <div class="meal-section">
         <div class="section-title"><i class="fas fa-utensils"></i> 今天吃了什么？</div>
-        <!-- 早餐 -->
         <div class="meal-card">
-            <div class="meal-header">
-                <span class="meal-name"><i class="fas fa-sun" style="color:#f4a261;"></i> 早餐</span>
-                <div class="toggle-group" data-meal="breakfast">
-                    <span class="toggle-btn active" data-value="yes">吃了 ✓</span>
-                    <span class="toggle-btn" data-value="no">没吃</span>
-                </div>
+            <div class="meal-header"><span class="meal-name"><i class="fas fa-sun" style="color:#f4a261;"></i> 早餐</span>
+                <div class="toggle-group" data-meal="breakfast"><span class="toggle-btn active" data-value="yes">吃了 ✓</span><span class="toggle-btn" data-value="no">没吃</span></div>
             </div>
-            <div class="meal-detail-input">
-                <i class="fas fa-pen"></i>
-                <input type="text" id="breakfastDetail" placeholder="比如：三明治、牛奶..." maxlength="30">
-            </div>
+            <div class="meal-detail-input"><i class="fas fa-pen"></i><input type="text" id="breakfastDetail" placeholder="比如：三明治、牛奶..." maxlength="30"></div>
         </div>
-        <!-- 午餐 -->
         <div class="meal-card">
-            <div class="meal-header">
-                <span class="meal-name"><i class="fas fa-cloud-sun" style="color:#e09f5c;"></i> 午餐</span>
-                <div class="toggle-group" data-meal="lunch">
-                    <span class="toggle-btn active" data-value="yes">吃了 ✓</span>
-                    <span class="toggle-btn" data-value="no">没吃</span>
-                </div>
+            <div class="meal-header"><span class="meal-name"><i class="fas fa-cloud-sun" style="color:#e09f5c;"></i> 午餐</span>
+                <div class="toggle-group" data-meal="lunch"><span class="toggle-btn active" data-value="yes">吃了 ✓</span><span class="toggle-btn" data-value="no">没吃</span></div>
             </div>
-            <div class="meal-detail-input">
-                <i class="fas fa-pen"></i>
-                <input type="text" id="lunchDetail" placeholder="比如：牛肉饭、沙拉..." maxlength="30">
-            </div>
+            <div class="meal-detail-input"><i class="fas fa-pen"></i><input type="text" id="lunchDetail" placeholder="比如：牛肉饭、沙拉..." maxlength="30"></div>
         </div>
-        <!-- 晚餐 -->
         <div class="meal-card">
-            <div class="meal-header">
-                <span class="meal-name"><i class="fas fa-moon" style="color:#8f7a9b;"></i> 晚餐</span>
-                <div class="toggle-group" data-meal="dinner">
-                    <span class="toggle-btn active" data-value="yes">吃了 ✓</span>
-                    <span class="toggle-btn" data-value="no">没吃</span>
-                </div>
+            <div class="meal-header"><span class="meal-name"><i class="fas fa-moon" style="color:#8f7a9b;"></i> 晚餐</span>
+                <div class="toggle-group" data-meal="dinner"><span class="toggle-btn active" data-value="yes">吃了 ✓</span><span class="toggle-btn" data-value="no">没吃</span></div>
             </div>
-            <div class="meal-detail-input">
-                <i class="fas fa-pen"></i>
-                <input type="text" id="dinnerDetail" placeholder="比如：意面、汤..." maxlength="30">
-            </div>
+            <div class="meal-detail-input"><i class="fas fa-pen"></i><input type="text" id="dinnerDetail" placeholder="比如：意面、汤..." maxlength="30"></div>
         </div>
-        <!-- 夜宵 -->
         <div class="night-snack-row">
-            <div class="snack-header">
-                <label><input type="checkbox" id="nightSnackCheck"> <i class="fas fa-cookie-bite"></i> 偷偷吃宵夜了没？</label>
-            </div>
-            <div class="meal-detail-input" style="margin-top:10px;">
-                <i class="fas fa-pen"></i>
-                <input type="text" id="nightSnackDetail" placeholder="比如：酸奶、水果..." maxlength="30" disabled>
-            </div>
+            <div class="snack-header"><label><input type="checkbox" id="nightSnackCheck"> <i class="fas fa-cookie-bite"></i> 偷偷吃宵夜了没？</label></div>
+            <div class="meal-detail-input" style="margin-top:10px;"><i class="fas fa-pen"></i><input type="text" id="nightSnackDetail" placeholder="比如：酸奶、水果..." maxlength="30" disabled></div>
         </div>
     </div>
 
@@ -315,27 +296,21 @@
         <div class="calendar-title">📅 本月汇报日历</div>
         <div id="calendarGrid" class="calendar-grid"></div>
     </div>
-    <div class="footer-note">⚡ 点击提交后会出现幸运签哦～</div>
+    <div class="footer-note">⚡ 点击提交后会出现幸运签和动画哦～</div>
 </div>
 
 <script>
     (function(){
         "use strict";
-        // ---------- 自定义文案库 (来自你的编辑表) ----------
+        // ---------- 自定义文案库 ----------
         const GREETINGS = {
             morning: ["奥力给了兄弟们", "今天不准吃奥里给", "今天可以吃奥力给呦，又给你爽到了（彩蛋）"],
             afternoon: ["刚醒吧，又爽了，牛逼", "下次早点醒，早上的问候有惊喜，每天不重样，看你能不能刷到彩蛋", "今天的你也在闪闪发光"],
             evening: ["晚间问候，没睡吧，牛逼", "辛苦啦，抱抱～", "月亮不睡你不睡，你是大傻逼"]
         };
-        const POKE_MESSAGES = [
-            "滚就行了（彩蛋）", "戳一次=亲一口 💋", "戳坏了要赔的哦～", "第N次被戳，好幸福",
-            "这里也有一个小彩蛋呦", "再戳我就把你吃掉！", "叮！收到一份想念～"
-        ];
-        const FORTUNE_MESSAGES = [
-            "什么都没有", "滚", "滚就行了", "宜：吃甜食 🍰", "想吃什么",
-            "奖励一顿奥利给", "奖励一顿给你做好吃的", "今天会有小惊喜（滚）", "芜湖", "宜：早点睡觉"
-        ];
-        const LAST_MOOD_TEXT = "又给你爽到了";  // 也可以是“不准暗爽”，你选“又给你爽到了”
+        const POKE_MESSAGES = ["滚就行了（彩蛋）", "戳一次=亲一口 💋", "戳坏了要赔的哦～", "第N次被戳，好幸福", "这里也有一个小彩蛋呦", "再戳我就把你吃掉！", "叮！收到一份想念～"];
+        const FORTUNE_MESSAGES = ["什么都没有", "滚", "滚就行了", "宜：吃甜食 🍰", "想吃什么", "奖励一顿奥利给", "奖励一顿给你做好吃的", "今天会有小惊喜（滚）", "芜湖", "宜：早点睡觉"];
+        const LAST_MOOD_TEXT = "又给你爽到了";
         const STREAK_TEXT = "还是你牛逼，有恒心啊🌱";
 
         // ---------- 基础设置 ----------
@@ -348,143 +323,168 @@
         document.getElementById('todayDate').textContent = `${y}.${m}.${d} ${wd}`;
         const todayStr = `${y}-${m}-${d}`;
 
-        // 随机时段问候
+        // 随机问候
         const hour = today.getHours();
-        let greetArr;
-        if (hour >= 5 && hour < 12) greetArr = GREETINGS.morning;
-        else if (hour >= 12 && hour < 18) greetArr = GREETINGS.afternoon;
-        else greetArr = GREETINGS.evening;
-        document.getElementById('greetingMsg').textContent = greetArr[Math.floor(Math.random() * greetArr.length)];
+        let greetArr = hour>=5&&hour<12 ? GREETINGS.morning : (hour>=12&&hour<18 ? GREETINGS.afternoon : GREETINGS.evening);
+        document.getElementById('greetingMsg').textContent = greetArr[Math.floor(Math.random()*greetArr.length)];
 
-        // 戳戳乐彩蛋
+        // 戳戳乐
         const pokeToast = document.getElementById('pokeToast');
-        document.getElementById('pokeTrigger').addEventListener('click', () => {
-            const msg = POKE_MESSAGES[Math.floor(Math.random() * POKE_MESSAGES.length)];
-            pokeToast.style.opacity = '1';
-            pokeToast.textContent = msg;
-            setTimeout(() => pokeToast.style.opacity = '0', 2000);
+        document.getElementById('pokeTrigger').addEventListener('click', ()=>{
+            pokeToast.style.opacity='1';
+            pokeToast.textContent = POKE_MESSAGES[Math.floor(Math.random()*POKE_MESSAGES.length)];
+            setTimeout(()=>pokeToast.style.opacity='0',2000);
         });
 
-        // ---------- 心情仪表 ----------
+        // ---------- 天气 (需替换API Key) ----------
+        const WEATHER_API_KEY = 'ee4e5f763f4041b24acfd8ac233a3548'; // 请替换为OpenWeatherMap的API Key
+        async function fetchWeather() {
+            const weatherBox = document.getElementById('weatherBox');
+            if (WEATHER_API_KEY === '你的API_KEY') {
+                document.getElementById('weatherCity').textContent = '未配置Key';
+                document.getElementById('weatherTemp').textContent = '--°C';
+                document.getElementById('weatherDesc').textContent = '请设置API Key';
+                document.getElementById('clothesTip').textContent = '天气不可用';
+                return;
+            }
+            try {
+                // 尝试获取地理位置
+                const position = await new Promise((resolve, reject) => {
+                    navigator.geolocation.getCurrentPosition(resolve, reject, { timeout: 5000 });
+                });
+                const lat = position.coords.latitude;
+                const lon = position.coords.longitude;
+                const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${WEATHER_API_KEY}&units=metric&lang=zh_cn`;
+                const res = await fetch(url);
+                const data = await res.json();
+                updateWeatherUI(data);
+            } catch (e) {
+                console.warn('定位失败，使用默认城市北京');
+                try {
+                    const url = `https://api.openweathermap.org/data/2.5/weather?q=Beijing&appid=${WEATHER_API_KEY}&units=metric&lang=zh_cn`;
+                    const res = await fetch(url);
+                    const data = await res.json();
+                    updateWeatherUI(data);
+                } catch (e2) {
+                    document.getElementById('weatherCity').textContent = '获取失败';
+                }
+            }
+        }
+        function updateWeatherUI(data) {
+            if (data.cod !== 200) return;
+            const temp = Math.round(data.main.temp);
+            const desc = data.weather[0].description;
+            const iconCode = data.weather[0].icon;
+            const city = data.name;
+            document.getElementById('weatherTemp').textContent = `${temp}°C`;
+            document.getElementById('weatherDesc').textContent = desc;
+            document.getElementById('weatherCity').textContent = city;
+            // 简单图标映射
+            const iconMap = { '01d':'☀️','01n':'🌙','02d':'⛅','02n':'☁️','03d':'☁️','03n':'☁️','04d':'☁️','04n':'☁️','09d':'🌧️','09n':'🌧️','10d':'🌦️','10n':'🌧️','11d':'⛈️','11n':'⛈️','13d':'❄️','13n':'❄️','50d':'🌫️','50n':'🌫️' };
+            document.getElementById('weatherIcon').textContent = iconMap[iconCode] || '🌡️';
+            // 穿衣推荐
+            let clothes = '';
+            if (temp >= 28) clothes = '天气炎热，建议穿短袖、短裤，注意防晒';
+            else if (temp >= 22) clothes = '舒适温暖，建议穿单层棉麻面料的T恤、薄长裤';
+            else if (temp >= 15) clothes = '有点凉，建议穿长袖衬衫、薄外套';
+            else if (temp >= 8) clothes = '较冷，建议穿毛衣、厚外套';
+            else clothes = '寒冷，建议穿羽绒服、棉衣';
+            if (desc.includes('雨')) clothes += '，记得带伞';
+            document.getElementById('clothesTip').textContent = clothes;
+        }
+        fetchWeather();
+
+        // ---------- 喝水打卡 ----------
+        const cupsContainer = document.getElementById('cupsContainer');
+        const waterCountDisplay = document.getElementById('waterCountDisplay');
+        let waterCount = parseInt(localStorage.getItem('waterCount') || '0');
+        function renderCups() {
+            cupsContainer.innerHTML = '';
+            for (let i=0; i<8; i++) {
+                const cup = document.createElement('span');
+                cup.classList.add('cup');
+                cup.innerHTML = '<i class="fas fa-glass-whiskey"></i>';
+                if (i < waterCount) cup.classList.add('filled');
+                cup.addEventListener('click', ()=>{
+                    waterCount = i+1;
+                    localStorage.setItem('waterCount', waterCount);
+                    renderCups();
+                });
+                cupsContainer.appendChild(cup);
+            }
+            waterCountDisplay.textContent = `${waterCount}/8`;
+        }
+        renderCups();
+
+        // ---------- 心情仪表 (略，与之前相同) ----------
         const canvas = document.getElementById('moodGauge');
         const ctx = canvas.getContext('2d');
         const moodSlider = document.getElementById('moodSlider');
         const moodPercent = document.getElementById('moodPercent');
         const moodCategory = document.getElementById('moodCategory');
         const lastMoodNote = document.getElementById('lastMoodNote');
-
-        function getMoodCategory(value) {
-            if (value <= 10) return '😞 不开心';
-            if (value <= 30) return '😐 一般';
-            if (value <= 50) return '🙂 不错';
-            if (value <= 70) return '😊 开心';
-            return '✨ 完美';
-        }
-        function drawGauge(value) {
-            const w=120, h=60;
-            canvas.width=w; canvas.height=h;
-            ctx.clearRect(0,0,w,h);
-            const cx=60, cy=50, r=32;
-            ctx.beginPath(); ctx.arc(cx,cy,r,Math.PI,2*Math.PI,false);
-            ctx.lineWidth=9; ctx.strokeStyle='#f5ddd2'; ctx.stroke();
-            const endAngle = Math.PI + (value/100)*Math.PI;
-            const grad=ctx.createLinearGradient(10,20,110,20);
-            grad.addColorStop(0,'#d99b8a'); grad.addColorStop(0.6,'#e6b19e');
-            ctx.beginPath(); ctx.arc(cx,cy,r,Math.PI,endAngle,false);
-            ctx.lineWidth=9; ctx.strokeStyle=grad; ctx.stroke();
-            const pAngle = Math.PI + (value/100)*Math.PI;
+        function getMoodCategory(val){ if(val<=10)return'😞 不开心'; if(val<=30)return'😐 一般'; if(val<=50)return'🙂 不错'; if(val<=70)return'😊 开心'; return'✨ 完美'; }
+        function drawGauge(val){
+            const w=120,h=60; canvas.width=w; canvas.height=h; ctx.clearRect(0,0,w,h);
+            const cx=60,cy=50,r=32;
+            ctx.beginPath(); ctx.arc(cx,cy,r,Math.PI,2*Math.PI,false); ctx.lineWidth=9; ctx.strokeStyle='#f5ddd2'; ctx.stroke();
+            const endAngle = Math.PI + (val/100)*Math.PI;
+            const grad=ctx.createLinearGradient(10,20,110,20); grad.addColorStop(0,'#d99b8a'); grad.addColorStop(0.6,'#e6b19e');
+            ctx.beginPath(); ctx.arc(cx,cy,r,Math.PI,endAngle,false); ctx.lineWidth=9; ctx.strokeStyle=grad; ctx.stroke();
+            const pAngle = Math.PI + (val/100)*Math.PI;
             const tipX=cx+Math.cos(pAngle)*22, tipY=cy+Math.sin(pAngle)*22;
-            ctx.beginPath(); ctx.moveTo(tipX,tipY);
-            ctx.lineTo(cx-6,cy-2); ctx.lineTo(cx-6,cy+2); ctx.closePath();
-            ctx.fillStyle='#8b5e4b'; ctx.shadowColor='#dbb6a8'; ctx.shadowBlur=6; ctx.fill();
-            ctx.shadowBlur=0;
+            ctx.beginPath(); ctx.moveTo(tipX,tipY); ctx.lineTo(cx-6,cy-2); ctx.lineTo(cx-6,cy+2); ctx.closePath();
+            ctx.fillStyle='#8b5e4b'; ctx.shadowColor='#dbb6a8'; ctx.shadowBlur=6; ctx.fill(); ctx.shadowBlur=0;
             ctx.beginPath(); ctx.arc(cx,cy,6,0,2*Math.PI); ctx.fillStyle='#a67b6a'; ctx.fill();
         }
-        function updateMood(val) {
-            moodPercent.textContent = val+'%';
-            moodCategory.textContent = getMoodCategory(val);
-            drawGauge(val);
-            localStorage.setItem('lastMoodValue', val);
-        }
-        moodSlider.addEventListener('input', e => updateMood(parseInt(e.target.value,10)));
+        function updateMood(val){ moodPercent.textContent=val+'%'; moodCategory.textContent=getMoodCategory(val); drawGauge(val); localStorage.setItem('lastMoodValue',val); }
+        moodSlider.addEventListener('input',e=>updateMood(parseInt(e.target.value,10)));
         const savedMood = localStorage.getItem('lastMoodValue');
-        if (savedMood !== null) {
-            moodSlider.value = savedMood;
-            updateMood(parseInt(savedMood,10));
-            lastMoodNote.textContent = `✨ ${LAST_MOOD_TEXT} (上次 ${savedMood}%)`;
-        } else {
-            updateMood(72);
-        }
+        if(savedMood){ moodSlider.value=savedMood; updateMood(parseInt(savedMood,10)); lastMoodNote.textContent=`✨ ${LAST_MOOD_TEXT} (上次 ${savedMood}%)`; } else updateMood(72);
 
         // 用餐切换
-        document.querySelectorAll('.toggle-group').forEach(g => {
-            const btns = g.querySelectorAll('.toggle-btn');
-            btns.forEach(b => b.addEventListener('click', function(){
-                btns.forEach(btn=>btn.classList.remove('active'));
-                this.classList.add('active');
-            }));
-        });
-        const nightCheck = document.getElementById('nightSnackCheck');
-        const nightDetail = document.getElementById('nightSnackDetail');
-        nightCheck.addEventListener('change', e => {
-            nightDetail.disabled = !e.target.checked;
-            if(!e.target.checked) nightDetail.value = '';
-        });
+        document.querySelectorAll('.toggle-group').forEach(g=>{ const btns=g.querySelectorAll('.toggle-btn'); btns.forEach(b=>b.addEventListener('click',function(){ btns.forEach(btn=>btn.classList.remove('active')); this.classList.add('active'); })); });
+        const nightCheck = document.getElementById('nightSnackCheck'); const nightDetail = document.getElementById('nightSnackDetail');
+        nightCheck.addEventListener('change',e=>{ nightDetail.disabled=!e.target.checked; if(!e.target.checked) nightDetail.value=''; });
 
-        // ---------- 本地存储：汇报天数 & 日历 ----------
-        function getReportedDates() {
-            const stored = localStorage.getItem('reportedDates');
-            return stored ? JSON.parse(stored) : [];
-        }
-        function addReportedDate(dateStr) {
-            const dates = getReportedDates();
-            if (!dates.includes(dateStr)) {
-                dates.push(dateStr);
-                localStorage.setItem('reportedDates', JSON.stringify(dates));
-            }
-            updateStreakAndCalendar();
-        }
-        function updateStreakAndCalendar() {
-            const dates = getReportedDates();
-            const count = dates.length;
+        // 本地存储日历等 (保持原有逻辑)
+        function getReportedDates(){ const s=localStorage.getItem('reportedDates'); return s?JSON.parse(s):[]; }
+        function addReportedDate(ds){ const dates=getReportedDates(); if(!dates.includes(ds)){ dates.push(ds); localStorage.setItem('reportedDates',JSON.stringify(dates)); } updateStreakAndCalendar(); }
+        function updateStreakAndCalendar(){
+            const dates=getReportedDates(); const count=dates.length;
             document.getElementById('streakDisplay').textContent = `${STREAK_TEXT.replace('🌱','')} (累计${count}天)`;
             renderCalendar(dates);
         }
-        function renderCalendar(reportedDates) {
-            const year = today.getFullYear();
-            const month = today.getMonth();
-            const firstDay = new Date(year, month, 1).getDay(); // 0=周日
-            const daysInMonth = new Date(year, month+1, 0).getDate();
-            const grid = document.getElementById('calendarGrid');
-            grid.innerHTML = '';
-            const weekDays = ['日','一','二','三','四','五','六'];
-            weekDays.forEach(w => { const d=document.createElement('div'); d.textContent=w; d.style.fontWeight='600'; grid.appendChild(d); });
-            for (let i=0; i<firstDay; i++) { const empty=document.createElement('div'); grid.appendChild(empty); }
-            for (let day=1; day<=daysInMonth; day++) {
-                const dateDiv = document.createElement('div');
-                dateDiv.textContent = day;
-                dateDiv.classList.add('cal-day');
-                const dateStr = `${year}-${String(month+1).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
-                if (reportedDates.includes(dateStr)) dateDiv.classList.add('checked');
-                if (day === today.getDate()) dateDiv.style.boxShadow = '0 0 0 2px #d48d7a';
-                grid.appendChild(dateDiv);
+        function renderCalendar(reportedDates){
+            const year=today.getFullYear(), month=today.getMonth();
+            const firstDay=new Date(year,month,1).getDay(), daysInMonth=new Date(year,month+1,0).getDate();
+            const grid=document.getElementById('calendarGrid'); grid.innerHTML='';
+            ['日','一','二','三','四','五','六'].forEach(w=>{ const d=document.createElement('div'); d.textContent=w; d.style.fontWeight='600'; grid.appendChild(d); });
+            for(let i=0;i<firstDay;i++){ const empty=document.createElement('div'); grid.appendChild(empty); }
+            for(let day=1;day<=daysInMonth;day++){
+                const div=document.createElement('div'); div.textContent=day; div.classList.add('cal-day');
+                const ds=`${year}-${String(month+1).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
+                if(reportedDates.includes(ds)) div.classList.add('checked');
+                if(day===today.getDate()) div.style.boxShadow='0 0 0 2px #d48d7a';
+                grid.appendChild(div);
             }
         }
         updateStreakAndCalendar();
 
-        // ---------- 提交汇报 (含幸运签 & 记录日期) ----------
+        // 提交逻辑 (带动画)
         const submitBtn = document.getElementById('submitReportBtn');
         const formStatus = document.getElementById('formStatus');
-        const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mdayegva'; 
+        const overlay = document.getElementById('successOverlay');
+        const FORMSPREE_ENDPOINT = 'https://formspree.io/f/{你的表单ID}';
 
-        function getMealStatus(meal) {
+        function getMealStatus(meal){
             const group = document.querySelector(`.toggle-group[data-meal="${meal}"]`);
             if(!group) return '未知';
             const active = group.querySelector('.toggle-btn.active');
             return active ? active.dataset.value : 'yes';
         }
 
-        submitBtn.addEventListener('click', async (e) => {
+        submitBtn.addEventListener('click', async (e)=>{
             e.preventDefault();
             const moodVal = parseInt(moodSlider.value,10);
             const breakfastStatus = getMealStatus('breakfast')==='yes'?'已吃':'未吃';
@@ -498,41 +498,28 @@
             const whisper = document.getElementById('whisperMessage').value.trim()||'（没有留下悄悄话）';
             const dateStr = `${y}.${m}.${d} ${wd}`;
             const moodText = `${moodVal}% (${getMoodCategory(moodVal)})`;
+            const waterMsg = `喝水 ${waterCount}/8 杯`;
 
-            // 记录日期 (本地)
             addReportedDate(todayStr);
+            const fortune = FORTUNE_MESSAGES[Math.floor(Math.random()*FORTUNE_MESSAGES.length)];
 
-            // 随机幸运签
-            const fortune = FORTUNE_MESSAGES[Math.floor(Math.random() * FORTUNE_MESSAGES.length)];
+            // 动画
+            overlay.style.opacity = '1';
+            overlay.style.pointerEvents = 'none';
+            setTimeout(()=>{ overlay.style.opacity = '0'; }, 1200);
 
             if (FORMSPREE_ENDPOINT.includes('{你的表单ID}')) {
                 formStatus.innerHTML = `🔮 幸运签：${fortune}`;
-                alert('✨ 演示模式 ✨\n' + `日期:${dateStr}\n心情:${moodText}\n早餐:${breakfastStatus} ${breakfastDetail}\n午餐:${lunchStatus} ${lunchDetail}\n晚餐:${dinnerStatus} ${dinnerDetail}\n夜宵:${nightSnackStatus} ${nightDetailText}\n悄悄话:${whisper}`);
+                alert(`✨ 演示模式 ✨\n日期:${dateStr}\n心情:${moodText}\n${waterMsg}\n早餐:${breakfastStatus} ${breakfastDetail}\n午餐:${lunchStatus} ${lunchDetail}\n晚餐:${dinnerStatus} ${dinnerDetail}\n夜宵:${nightSnackStatus} ${nightDetailText}\n悄悄话:${whisper}`);
                 return;
             }
-
             formStatus.textContent = '💭 发送中...';
-            const emailBody = `
-【奥力给汇报】${dateStr}
-😊心情: ${moodText}
-🍽️早餐: ${breakfastStatus} — ${breakfastDetail}
-🍱午餐: ${lunchStatus} — ${lunchDetail}
-🍛晚餐: ${dinnerStatus} — ${dinnerDetail}
-🌙夜宵: ${nightSnackStatus} — ${nightDetailText}
-💬悄悄话: ${whisper}
-            `.trim();
-
-            try {
-                const res = await fetch(FORMSPREE_ENDPOINT, {
-                    method:'POST', headers:{'Content-Type':'application/json'},
-                    body: JSON.stringify({ _subject: `🏀汇报 ${dateStr}`, 汇报内容: emailBody })
-                });
-                if(res.ok) {
-                    formStatus.innerHTML = `🔮 幸运签：${fortune}`;
-                } else throw new Error();
-            } catch(err) {
-                formStatus.textContent = '❌ 发送失败';
-            }
+            const emailBody = `【奥力给汇报】${dateStr}\n😊心情: ${moodText}\n💧${waterMsg}\n🍽️早餐: ${breakfastStatus} — ${breakfastDetail}\n🍱午餐: ${lunchStatus} — ${lunchDetail}\n🍛晚餐: ${dinnerStatus} — ${dinnerDetail}\n🌙夜宵: ${nightSnackStatus} — ${nightDetailText}\n💬悄悄话: ${whisper}`;
+            try{
+                const res = await fetch(FORMSPREE_ENDPOINT, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ _subject: `🏀汇报 ${dateStr}`, 汇报内容: emailBody }) });
+                if(res.ok) formStatus.innerHTML = `🔮 幸运签：${fortune}`;
+                else throw new Error();
+            }catch(err){ formStatus.textContent = '❌ 发送失败'; }
         });
     })();
 </script>
